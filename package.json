@@ -1,0 +1,30 @@
+{
+  "name": "therapyai",
+  "version": "1.0.0",
+  "description": "Starting project",
+  "main": "app.js",
+  "scripts": {
+    "dev": "nodemon -e js,hbs,css app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/javideas/TherapyAI.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/javideas/TherapyAI/issues"
+  },
+  "homepage": "https://github.com/javideas/TherapyAI#readme",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "hbs": "^4.2.0",
+    "mongoose": "^6.9.1",
+    "openai": "^3.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
