@@ -1,7 +1,8 @@
 require('dotenv').config();
 const express = require('express');
 const app = express();
-
+require('./config/db.config.js');
+app.use(express.urlencoded({extended: true}));
 app.set('view engine', 'hbs');
 app.set('views', `${__dirname}/views`);
 
