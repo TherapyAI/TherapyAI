@@ -1,9 +1,9 @@
 const mongoose = require("mongoose");
 const schema = new mongoose.Schema(
   {
-    text: {
+    message: {
       type: String,
-    },
+    }
   },
   { timestamps: true }
 );

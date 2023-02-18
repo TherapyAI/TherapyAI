@@ -1,1 +1,14 @@
-this is chat
+<form action="/chat" method="POST">
+    <label for="message">
+        Message
+    </label>
+    <input type="message" id="message" name="message">
+    <button type="submit">Submit</button>
+</form>
+<div>
+    <ul>
+    {{#each messages as |message|}}
+        <li>{{message.message}}</li>
+    {{/each}}
+    </ul>
+</div>

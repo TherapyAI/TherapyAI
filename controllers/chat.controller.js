@@ -1,38 +1,54 @@
+const Message = require('../models/message.model.js');
 const { Configuration, OpenAIApi } = require("openai");
+
 const configuration = new Configuration({
-    apiKey: process.env.OPEN_AI_KEY,
+apiKey: process.env.OPEN_AI_KEY,
 });
 const openai = new OpenAIApi(configuration);
 
-module.exports.chat = async (req, res) => {
-    try {
-      const { prompt } = req.body;
-      const response = await openai.createCompletion({
-        model: "text-davinci-003",
-        prompt: `
-                //Creates answer to the question prompted by the user
-                Question:${prompt}
-                Answer:
-                ###
-              `,
+module.exports.sendChat = (req, res, next) => {
+  const { message } = req.body;
+
+  // create new message document in MongoDB
+  Message.create({ message })
+    .then(() => {
+      // generate response from OpenAI API
+      return openai.createCompletion({
+        model: 'text-davinci-003',
+        prompt: `//Imagine a conversation between a therapist and a patient. I will provide the patient's dialogue and you only will provide the therapist dialogue. Don't autocomplete the patient's dialogue. Create only the dialogue for the therapist taking in count the patient's answer and the patient's info. If the patient shows any kind of harmful behaviour, please advise the patient to seek for professional real help.//
+        Patient: "` + message + '" \n\n',
         max_tokens: 64,
-        temperature: 0,
+        temperature: 0.5,
         top_p: 1.0,
         frequency_penalty: 0.0,
         presence_penalty: 0.0,
-        stop: ["\n"],
+        stop: ['\n'],
       });
-  
-      return res.status(200).json({
-        success: true,
-        data: response.data.choices[0].text,
-      });
-    } catch (error) {
-      return res.status(400).json({
-        success: false,
-        error: error.response
-          ? error.response.data
-          : "There was an issue on the server",
-      });
-    }
-  };
+    })
+    .then((response) => {
+      const reply = response.data.choices[0].text;
+      // create new reply message document in MongoDB
+      return Message.create({ message: reply });
+    })
+    .then(() => {
+      // load all messages and render chat UI
+      return Message.find();
+    })
+    .then((messages) => {
+      res.render('chat', { messages });
+    })
+    .catch((error) => {
+      console.error('An error occurred', error);
+      res.status(500).send('An error occurred');
+    });
+};
+
+module.exports.loadChat = (req,res,next) => {
+  Message.find()
+    .then((messages)=> {
+      res.render('chat', { messages });
+    })
+    .catch((error)=> {
+      console.error("An error occurred", error);
+    });
+};
