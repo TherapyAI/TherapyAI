@@ -1,14 +1,26 @@
-<form action="/chat" method="POST">
-    <label for="message">
-        Message
-    </label>
-    <input type="message" id="message" name="message">
-    <button type="submit">Submit</button>
-</form>
-<div>
-    <ul>
-    {{#each messages as |message|}}
-        <li>{{message.message}}</li>
-    {{/each}}
-    </ul>
+<div class="d-flex flex-row justify-content-center align-content-center">
+    <div class="d-flex flex-column gap-4 justify-content-end mt-5 bg-primary-subtle p-3 rounded-4">
+        <div id="frame">
+            <div>{{> conversation}}</div>
+        </div>
+        <div class="d-flex flex-row justify-content-center">
+            <form action="/chat" method="POST">
+                <label for="message">
+                    Message
+                </label>
+                <input type="text" id="message" name="message">
+                <button type="button" id="submit-button">Submit</button>
+            </form>
+        </div>
+    </div>
 </div>
+<script> //https://jsfiddle.net/9bazc6hx/3/ TODO: scroll direct bottom
+    const scrollToBottom = (id) => {
+        const element = document.getElementById(id);
+        element.scrollTop = element.scrollHeight;
+    }
+    
+    $(window).on("load", function() {
+        scrollToBottom("frame");
+    });
+</script>
