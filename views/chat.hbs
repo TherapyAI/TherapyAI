@@ -8,7 +8,7 @@
             <div>{{> conversation}}</div>
         </div>
         <div class="d-flex flex-row justify-content-center">
-            <form action="/chat" method="POST">
+            <form action="/chat" method="POST" id="chat-form">
                 <label for="message">
                 </label>
                 <input type="text" id="message" name="message" class="rounded-3 border-0">
@@ -25,5 +25,18 @@
     
     $(window).on("load", function() {
         scrollToBottom("frame");
+    });
+
+    const chatForm = document.getElementById('chat-form');
+    const messagesUl = document.getElementById('messages-ul');
+
+    chatForm.addEventListener('submit', (event) => {
+        const inputValue = document.getElementById('message').value;
+        const newLi = document.createElement('li');
+        newLi.textContent = "Patient: " + inputValue;
+        messagesUl.appendChild(newLi);
+        setTimeout(() => {
+            document.getElementById('message').value = '';
+        }, 10);
     });
 </script>
