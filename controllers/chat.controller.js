@@ -8,6 +8,7 @@ const openai = new OpenAIApi(configuration);
 
 module.exports.sendChat = (req, res, next) => { // TODO: 1st phase without user. 2nd phase with 1 user. 3rd phase 2 users
   // Message.find().then -> return Message.create({ message })
+  //add query de sort, me devuelve un array, reduce para convertir a 1 string usando \n
   //const history = all the messages from mongoDB;
   const patientPrefix = 'Patient: '
   // req.body.message = history + patientPrefix + req.body.message;
