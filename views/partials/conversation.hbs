@@ -1,8 +1,16 @@
-<div class="text-primary">
+<div class="text-white">
     <div>
-        <ul>
+        <ul id="messages-ul" class="list-unstyled">
         {{#each messages as |message|}}
-            <li>{{message.message}}</li>
+            {{#if (contains message.message "Patient: ")}}
+                <div class="d-flex flex-row justify-content-end">
+                    <li class="patient bg-primary bg-gradient rounded-2 m-2 p-2" style="max-width: 400px;">{{message.message}}</li>
+                </div>
+            {{else if (contains message.message "Therapist: ")}}
+                <div class="d-flex flex-row justify-content-start">
+                    <li class="therapist bg-primary bg-gradient rounded-2 m-2 p-2" style="max-width: 400px;">{{message.message}}</li>
+                </div>
+            {{/if}}
         {{/each}}
         </ul>
     </div>
