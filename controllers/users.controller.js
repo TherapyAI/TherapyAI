@@ -42,8 +42,6 @@ module.exports.login = (req, res) => {
   res.render("login");
 };
 
-const sessions = {};
-
 module.exports.doLogin = (req, res, next) => {
   User.findOne({ email: req.body.email })
     .then((user) => {
@@ -58,4 +56,14 @@ module.exports.doLogin = (req, res, next) => {
         .catch(next);
     })
     .catch(next);
+};
+
+module.exports.logout = (req, res) => {
+  req.session.destroy((error) => {
+    if (error) {
+      console.log("Error destroying session: ", error);
+    } else {
+      res.redirect("/login");
+    }
+  });
 };

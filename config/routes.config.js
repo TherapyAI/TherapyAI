@@ -16,4 +16,6 @@ router.post("/login", users.doLogin);
 router.get("/chat", secure.isAuthenticated, session.loadChat);
 router.post("/chat", secure.isAuthenticated, session.sendChat);
 
+router.post("/logout", users.logout);
+
 module.exports = router;

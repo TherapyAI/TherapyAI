@@ -7,12 +7,10 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration);
 
 module.exports.sendChat = (req, res, next) => { // TODO: 1st phase without user. 2nd phase with 1 user. 3rd phase 2 users
-  // Message.find().then -> return Message.create({ message })
   let history = "";
 
   const userId = req.user.id;
   Message.find({ user: userId })
-    .populate('user')
     .then((messages) => {
       if( messages != undefined) {
         history = messages.reduce((accumulator, message) => {
@@ -56,7 +54,7 @@ module.exports.sendChat = (req, res, next) => { // TODO: 1st phase without user.
         })
         .then(() => {
           // load all messages and render chat UI
-          return Message.find();
+          return Message.find({ user: userId });
         })
         .then((messages) => {
           res.render("chat", { messages });
@@ -71,7 +69,6 @@ module.exports.sendChat = (req, res, next) => { // TODO: 1st phase without user.
 module.exports.loadChat = (req, res, next) => {
   const userId = req.user.id;
   Message.find({ user: userId })
-    .populate('user')
     .then((messages) => {
       res.render("chat", { messages });
     })
