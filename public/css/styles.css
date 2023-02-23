@@ -16,11 +16,21 @@ body {
 }
 
 .therapist {
-    background-color: #9a89b2;
+    /* background-color: #9a89b2; */
+    background: rgb(135,119,159);
+    background: -moz-linear-gradient(0deg, rgba(135,119,159,1) 0%, rgba(154,137,178,1) 21%, rgba(178,161,201,1) 100%);
+    background: -webkit-linear-gradient(0deg, rgba(135,119,159,1) 0%, rgba(154,137,178,1) 21%, rgba(178,161,201,1) 100%);
+    background: linear-gradient(0deg, rgba(135,119,159,1) 0%, rgba(154,137,178,1) 21%, rgba(178,161,201,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#87779f",endColorstr="#b2a1c9",GradientType=1);
 }
 
 .patient {
-    background-color: #569fec;
+    /* background-color: #569fec; */
+    background: rgb(85,150,219);
+    background: -moz-linear-gradient(0deg, rgba(85,150,219,1) 0%, rgba(86,159,236,1) 21%, rgba(116,181,249,1) 100%);
+    background: -webkit-linear-gradient(0deg, rgba(85,150,219,1) 0%, rgba(86,159,236,1) 21%, rgba(116,181,249,1) 100%);
+    background: linear-gradient(0deg, rgba(85,150,219,1) 0%, rgba(86,159,236,1) 21%, rgba(116,181,249,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#5596db",endColorstr="#74b5f9",GradientType=1);
 }
 
 /* width */
