@@ -1,7 +1,7 @@
 require("dotenv").config();
 const createError = require("http-errors");
 const { session, loadSessionUser } = require("./config/session.config");
-const hbs = require('hbs');
+require('./config/hbs.config')
 
 const express = require("express");
 const app = express();
@@ -13,12 +13,7 @@ app.use(express.urlencoded({ extended: true }));
 app.set("view engine", "hbs");
 app.set("views", `${__dirname}/views`);
 
-hbs.registerPartials(__dirname + '/views/partials');
 app.use(express.static('public'));
-
-hbs.registerHelper('contains', function(str, substr) {
-  return str.indexOf(substr) !== -1;
-});
 
 app.use(session);
 app.use(loadSessionUser);
