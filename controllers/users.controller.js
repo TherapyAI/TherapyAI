@@ -11,19 +11,15 @@ module.exports.doCreate = (req, res, next) => {
     res.render("register", { errors, user: req.body });
   }
 
-  console.log("creando user...");
-
   delete req.body.role;
   User.findOne({ email: req.body.email })
     .then((user) => {
       console.log("user encontrado", user);
       if (user) {
-        console.log("user ya existe");
         renderWithErrors({ email: "email already registered" });
       } else {
         console.log("user no existe, creando", req.body);
         return User.create(req.body).then(() => {
-          console.log("algo");
           res.redirect("/login");
         });
       }
@@ -36,6 +32,10 @@ module.exports.doCreate = (req, res, next) => {
         next(error);
       }
     });
+};
+
+module.exports.profile = (req, res, next) => {
+  res.render("users/profile", { user: req.user });
 };
 
 module.exports.login = (req, res) => {
