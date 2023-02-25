@@ -2,6 +2,10 @@ const User = require("../models/user.model");
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 
+module.exports.askPermission = (req, res, next) => {
+  res.render("users/askPermission")
+}
+
 module.exports.create = (req, res, next) => {
   res.render("register");
 };
@@ -34,8 +38,26 @@ module.exports.doCreate = (req, res, next) => {
     });
 };
 
-module.exports.profile = (req, res, next) => {
+module.exports.showProfile = (req, res, next) => {
   res.render("users/profile", { user: req.user });
+};
+
+module.exports.updateProfile = (req, res, next) => {
+  const { name, lastName } = req.body;
+  const profilePic = req.file ? req.file.path : req.user.profilePic;
+
+  User.findByIdAndUpdate(
+    req.user.id,
+    { name, lastName, profilePic },
+    { runValidators: true }
+  )
+    .then(() => {
+      res.redirect("/profile");
+    })
+    .catch((error) => {
+      console.log(error);
+      next(error);
+    });
 };
 
 module.exports.login = (req, res) => {
@@ -63,7 +85,7 @@ module.exports.logout = (req, res) => {
     if (error) {
       console.log("Error destroying session: ", error);
     } else {
-      res.redirect("/login");
+      res.redirect("/");
     }
   });
 };

@@ -57,7 +57,7 @@ module.exports.sendChat = (req, res, next) => {
           return Message.find({ user: userId });
         })
         .then((messages) => {
-          res.render("chat", { messages });
+          res.render("users/chat", { messages, profilePic: req.user.profilePic });
         })
         .catch((error) => {
           console.error("An error occurred", error);
@@ -70,7 +70,7 @@ module.exports.loadChat = (req, res, next) => {
   const userId = req.user.id;
   Message.find({ user: userId })
     .then((messages) => {
-      res.render("chat", { messages });
+      res.render("users/chat", { messages, profilePic: req.user.profilePic });
     })
     .catch((error) => {
       console.error("An error occurred", error);

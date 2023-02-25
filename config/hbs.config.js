@@ -6,6 +6,7 @@ hbs.registerHelper("contains", function (str, substr) {
   return str.indexOf(substr) !== -1;
 });
 
+
 hbs.registerHelper("removePrefix", function (message) {
   if (message.startsWith("Patient: ")) {
     return message.substring(9);

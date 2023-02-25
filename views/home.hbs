@@ -1,7 +1,18 @@
-Hola is home
+<div class="d-flex flex-row justify-content-center">
 
-<a href="/chat">Chat</a>
-<br />
-<a href="/login">Login</a>
-<br />
-<a href="/register">Register</a>
+    <a href="/chat">Chat</a>
+
+    {{#if currentUser}}
+        <div>
+            <a href="/profile">Profile</a>
+            <form action="/logout" method="POST">
+                <button type="submit" class="rounded-3 border-0">Logout</button>
+            </form>
+        </div>
+    {{else}}
+        <div>
+            <a href="/login">Login</a>
+            <a href="/register">Register</a>
+        </div>
+    {{/if}}
+</div>

@@ -17,7 +17,10 @@ const schema = new mongoose.Schema(
       lowercase: true,
       trim: true,
     },
-    profilePic: { type: String },
+    profilePic: { 
+      type: String,
+      default: ""
+    },
     password: {
       type: String,
       required: [true, "password is required"],
@@ -25,8 +28,8 @@ const schema = new mongoose.Schema(
     },
     role: {
       type: String,
-      enum: ["admin", "patient"],
-      default: "patient",
+      enum: ["admin", "patient", "guest"],
+      default: "guest",
     },
   },
   { timestamps: true }

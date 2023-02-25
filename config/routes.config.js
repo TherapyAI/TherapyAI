@@ -12,13 +12,16 @@ router.get("/", common.home);
 
 router.get("/register", users.create);
 router.post("/register", users.doCreate);
-router.get("/profile", secure.isAuthenticated, multer.single('profilePic'), users.profile);
+router.get("/profile", secure.isAuthenticated, users.showProfile);
+router.post("/profile", secure.isAuthenticated, multer.single('profilePic'), users.updateProfile);
 
 router.get("/login", users.login);
 router.post("/login", users.doLogin);
 
-router.get("/chat", secure.isAuthenticated, session.loadChat);
-router.post("/chat", secure.isAuthenticated, session.sendChat);
+router.get("/chat", secure.isAuthenticated, secure.checkPatientRole, session.loadChat);
+router.post("/chat", secure.isAuthenticated, secure.checkPatientRole, session.sendChat);
+
+router.get("/askPermission", users.askPermission)
 
 router.post("/logout", users.logout);
 

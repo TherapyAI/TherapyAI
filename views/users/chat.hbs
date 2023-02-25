@@ -1,0 +1,61 @@
+<form action="/logout" method="POST">
+    <button type="submit" class="rounded-3 border-0">Logout</button>
+</form>
+
+<div class="outer">
+    <div class="inner d-flex flex-row justify-content-center">
+        <div class="d-flex flex-row justify-content-center">
+        <div class="box-chat d-flex flex-column p-3 gap-2 justify-content-end rounded-4">
+            <div id="frame">
+                <div>{{> conversation}}</div>
+            </div>
+            <div class="d-flex flex-row justify-content-center m-0">
+                <form action="/chat" method="POST" id="chat-form" class="m-0 container">
+                    <label for="message">
+                    </label>
+                    <div class="row gap-2">
+                        <textarea autofocus type="text" id="message" name="message"  maxlength="280" class="col-10 rounded-3 border-0 flex-grow-1" style="min-height: 50px;max-height: 80px; outline: none;"></textarea>
+                        <button type="submit" class="col-1 rounded-3 border-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#569fec" class="bi bi-send-fill" viewBox="0 0 16 16">
+                            <path d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855H.766l-.452.18a.5.5 0 0 0-.082.887l.41.26.001.002 4.995 3.178 3.178 4.995.002.002.26.41a.5.5 0 0 0 .886-.083l6-15Zm-1.833 1.89L6.637 10.07l-.215-.338a.5.5 0 0 0-.154-.154l-.338-.215 7.494-7.494 1.178-.471-.47 1.178Z"/></svg>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        </div>
+        <div class="profilePic">
+            <a href="/profile"><img src="{{profilePic}}" alt="profilePic" width="120px" class="rounded-circle"></a>
+        </div>
+    </div>
+</div>
+<script> //https://jsfiddle.net/9bazc6hx/3/ TODO: scroll direct bottom
+    const scrollToBottom = (id) => {
+        const element = document.getElementById(id);
+        element.scrollTop = element.scrollHeight;
+    }
+    
+    $(window).on("load", function() {
+        scrollToBottom("frame");
+    });
+
+    const chatForm = document.getElementById('chat-form');
+    const messagesUl = document.getElementById('messages-ul');
+
+    chatForm.addEventListener('submit', (event) => {
+        const newDiv = document.createElement('div');
+        newDiv.classList.add('d-flex', 'flex-row', 'justify-content-end');
+        const inputValue = document.getElementById('message').value;
+        const newLi = document.createElement('li');
+        newLi.textContent = inputValue;
+        newLi.setAttribute('style', 'max-width: 400px;');
+        newLi.classList.add('patient', 'rounded-2', 'm-2', 'p-2');
+        newDiv.appendChild(newLi);
+        messagesUl.appendChild(newDiv);
+        scrollToBottom("frame");
+        setTimeout(() => {
+            document.getElementById('message').value = '';
+        }, 10);
+    });
+
+</script>

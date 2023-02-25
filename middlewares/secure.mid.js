@@ -8,6 +8,7 @@ module.exports.isAuthenticated = (req, res, next) => {
   }
 };
 
+
 module.exports.checkRole = (role) => {
   return (req, res, next) => {
     if (req.user?.role === role) {
@@ -17,3 +18,12 @@ module.exports.checkRole = (role) => {
     }
   };
 };
+
+module.exports.checkPatientRole = (req, res, next) => {
+  if (req.user?.role === "patient") {
+    next();
+  } else {
+    res.redirect("/askPermission");
+  }
+};
+

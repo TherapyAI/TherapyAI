@@ -2,6 +2,48 @@ body {
   background-color: rgb(232 238 255);
 }
 
+.outer {
+  margin: auto;
+}
+
+.inner {
+  margin-left: 130px;
+}
+
+.profilePic {
+  margin-left: 10px;
+}
+
+.askPermission{
+  background-image: url("/images/imageAskPermission.png");
+  width: 100%;
+  height: 100%;
+}
+
+.messagePermission {
+  background-color: rgba(130, 131, 180, 0.76);
+  border-radius: 12px;
+  width: 800px;
+  color: white;
+  padding: 15px 40px 5px 40px;
+  font-size: 28px;
+}
+
+.linkedin{
+  background-color: white;
+  border-radius: 8px;
+  color: rgb(130 131 180);
+  padding: 12px;
+  font-size: 24px;
+  text-decoration: none;
+}
+
+.showcase {
+  color: rgb(14, 92, 176);
+  text-decoration: none;
+  font-weight: 800;
+}
+
 .box-chat {
   background-color: rgb(130 131 180);
 }
