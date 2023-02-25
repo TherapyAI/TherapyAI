@@ -6,9 +6,9 @@ const schema = new mongoose.Schema(
     },
     user: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'User',
-      required: [true, "An user is required"]
-    }
+      ref: "User",
+      required: [true, "An user is required"],
+    },
   },
   { timestamps: true }
 );

@@ -1,10 +1,9 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 
-const ADMIN_USERS = (process.env.ADMIN_USERS || 'admin@example.org')
-  .split(',')
-  .map(email => email.trim())
-
+const ADMIN_USERS = (process.env.ADMIN_USERS || "admin@example.org")
+  .split(",")
+  .map((email) => email.trim());
 
 const schema = new mongoose.Schema(
   {
@@ -18,6 +17,7 @@ const schema = new mongoose.Schema(
       lowercase: true,
       trim: true,
     },
+    profilePic: { type: String },
     password: {
       type: String,
       required: [true, "password is required"],
@@ -25,9 +25,9 @@ const schema = new mongoose.Schema(
     },
     role: {
       type: String,
-      enum: ['admin', 'patient'],
-      default: 'patient'
-    }
+      enum: ["admin", "patient"],
+      default: "patient",
+    },
   },
   { timestamps: true }
 );
@@ -36,7 +36,7 @@ schema.pre("save", function (next) {
   const user = this;
 
   if (ADMIN_USERS.includes(user.email)) {
-    user.role = 'admin';
+    user.role = "admin";
   }
 
   if (user.isModified("password")) {

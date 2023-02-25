@@ -1,7 +1,7 @@
 require("dotenv").config();
 const createError = require("http-errors");
 const { session, loadSessionUser } = require("./config/session.config");
-require('./config/hbs.config')
+require("./config/hbs.config");
 
 const express = require("express");
 const app = express();
@@ -13,7 +13,7 @@ app.use(express.urlencoded({ extended: true }));
 app.set("view engine", "hbs");
 app.set("views", `${__dirname}/views`);
 
-app.use(express.static('public'));
+app.use(express.static("public"));
 
 app.use(session);
 app.use(loadSessionUser);

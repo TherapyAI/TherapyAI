@@ -1,17 +1,23 @@
 <div class="text-white">
-    <div>
-        <ul id="messages-ul" class="list-unstyled">
-        {{#each messages as |message|}}
-            {{#if (contains message.message "Patient: ")}}
-                <div class="d-flex flex-row justify-content-end">
-                    <li class="patient rounded-2 m-2 p-2" style="max-width: 400px;">{{removePrefix message.message}}</li>
-                </div>
-            {{else if (contains message.message "Therapist: ")}}
-                <div class="d-flex flex-row justify-content-start">
-                    <li class="therapist rounded-2 m-2 p-2" style="max-width: 400px;">{{removePrefix message.message}}</li>
-                </div>
-            {{/if}}
-        {{/each}}
-        </ul>
-    </div>
+  <div>
+    <ul id="messages-ul" class="list-unstyled">
+      {{#each messages as |message|}}
+        {{#if (contains message.message "Patient: ")}}
+          <div class="d-flex flex-row justify-content-end">
+            <li
+              class="patient rounded-2 m-2 p-2"
+              style="max-width: 400px;"
+            >{{removePrefix message.message}}</li>
+          </div>
+        {{else if (contains message.message "Therapist: ")}}
+          <div class="d-flex flex-row justify-content-start">
+            <li
+              class="therapist rounded-2 m-2 p-2"
+              style="max-width: 400px;"
+            >{{removePrefix message.message}}</li>
+          </div>
+        {{/if}}
+      {{/each}}
+    </ul>
+  </div>
 </div>

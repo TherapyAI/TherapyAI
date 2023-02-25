@@ -1,0 +1,12 @@
+<form action="/profile" method="post" enctype="multipart/form-data">
+  <div>
+    <label for="profilePic">Profile Pic</label>
+    <input type="file" name="profilePic" />
+  </div>
+  <button type="submit"> Send</button>
+</form>
+
+{{user.name}}
+{{user.lastName}}
+{{user.email}}
+<img src="{{user.profilePic}}" alt="profilePic" />
