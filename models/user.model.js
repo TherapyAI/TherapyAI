@@ -17,9 +17,9 @@ const schema = new mongoose.Schema(
       lowercase: true,
       trim: true,
     },
-    profilePic: { 
+    profilePic: {
       type: String,
-      default: ""
+      default: "",
     },
     password: {
       type: String,

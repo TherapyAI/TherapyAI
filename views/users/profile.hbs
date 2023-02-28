@@ -1,16 +1,65 @@
-<form action="/profile" method="post" enctype="multipart/form-data">
-  <div>
-    <label for="profilePic">Profile Pic</label>
-    <input type="file" name="profilePic" />
+<div class="container emp-profile">
+  <div class="row">
+    <div class="col-md-4">
+      <div class="profile-img">
+        <img src="{{user.profilePic}}" alt="ProfilePic" />
+        <div class="file btn btn-lg btn-primary">
+          <form action="/profile" method="post" enctype="multipart/form-data">
+            <label class="lead" for="profilePic">Profile Pic</label>
+            <input type="file" name="profilePic" />
+            <button class="btn btn-outline-light" type="submit">Send</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+          <div class=" profile-head nav nav-tabs" id="myTab" role="tablist" >
+            <h5>Information</h5>
+          </div>
+    </div>
   </div>
-  <div>
-    <label for="name">Edit name</label>
-    <input type="text" name="name" value="{{user.name}}"/>
+  <div class="row">
+    <div class="col-md-4">
+    </div>
+    <div class="col-md-8">
+      <div class="tab-content profile-tab" id="myTabContent">
+        <div
+          class="tab-pane fade show active"
+          id="home"
+          role="tabpanel"
+          aria-labelledby="home-tab"
+        >
+          <div class="row">
+            <div class="col-md-6">
+              <label>Name</label>
+            </div>
+            <div class="col-md-6">
+              <p>{{user.name}}</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <label>Last Names</label>
+            </div>
+            <div class="col-md-6">
+              <p>{{user.lastName}}</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <label>Email</label>
+            </div>
+            <div class="col-md-6">
+              <p>{{user.email}}</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <label>Therapist Notes</label>
+            </div>
+            <div class="col-md-6">
+              <p>Notes</p>
+            </div>
+        </div>
   </div>
-  <button type="submit"> Send</button>
-</form>
-
-{{user.name}}
-{{user.lastName}}
-{{user.email}}
-<img src="{{user.profilePic}}" alt="profilePic" />
+</div>
