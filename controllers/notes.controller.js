@@ -6,7 +6,7 @@ const configuration = new Configuration({
 });
 const openai = new OpenAIApi(configuration);
 
-module.exports.sendChat = (req, res, next) => {
+module.exports.sendNotes = (req, res, next) => {
   let history = "";
 
   const userId = req.user.id;
@@ -22,22 +22,18 @@ module.exports.sendChat = (req, res, next) => {
       }
     })
     .then(() => {
-      const patientPrefix = "Patient: ";
-      req.body.message = patientPrefix + req.body.message;
-      const { message } = req.body;
-
       req.body.user = req.user.id;
+      const order = "//Psychological diagnosis: "
       // create new message document in MongoDB
-      return Message.create({ message, user: req.user.id })
+      return Message.create({ user: req.user.id })
         .then(() => {
           // generate response from OpenAI API
           return openai.createCompletion({
             model: "text-davinci-003",
             prompt:
-              `//Imagine a conversation between a therapist (called "TherapyAi") and a patient. I will provide the patient's dialogue and you only will provide the therapist dialogue. Don't autocomplete the patient's dialogue. Create only the dialogue for the therapist taking in count the patient's answer and the patient's info. If the patient shows any kind of harmful behaviour, please advise the patient to seek for professional real help. If the patient ask you to answer with more than 256 characters, you can't. Always answer in less than 256 characters//
+              `//Elaborate, from the next conversation between a Therapist and a patient, a Psychological diagnosis//
             ` +
-              history +
-              message +
+              history + order +
               '" \n\n',
             max_tokens: 120, // 4 characters by token, 0.75 words per token
             temperature: 0.5,
@@ -57,7 +53,7 @@ module.exports.sendChat = (req, res, next) => {
           return Message.find({ user: userId });
         })
         .then((messages) => {
-          res.render("users/chat", { messages, profilePic: req.user.profilePic });
+          res.render("users/profile", { messages, profilePic: req.user.profilePic });
         })
         .catch((error) => {
           console.error("An error occurred", error);
@@ -66,11 +62,11 @@ module.exports.sendChat = (req, res, next) => {
     });
 };
 
-module.exports.loadChat = (req, res, next) => {
+module.exports.loadNotes = (req, res, next) => {
   const userId = req.user.id;
   Message.find({ user: userId })
     .then((messages) => {
-      res.render("users/chat", { messages, profilePic: req.user.profilePic });
+      res.render("users/profile", { messages, profilePic: req.user.profilePic });
     })
     .catch((error) => {
       console.error("An error occurred", error);

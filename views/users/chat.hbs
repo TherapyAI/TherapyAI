@@ -42,7 +42,7 @@
     const chatForm = document.getElementById('chat-form');
     const messagesUl = document.getElementById('messages-ul');
 
-    chatForm.addEventListener('submit', (event) => {
+    const submitForm = () => {
         const newDiv = document.createElement('div');
         newDiv.classList.add('d-flex', 'flex-row', 'justify-content-end');
         const inputValue = document.getElementById('message').value;
@@ -56,6 +56,17 @@
         setTimeout(() => {
             document.getElementById('message').value = '';
         }, 10);
+    }
+
+    $("#message").keypress(function (e) {
+        if(e.which === 13 && !e.shiftKey) {
+            submitForm();
+            $(this).closest("form").submit();
+        }
+    });
+
+    chatForm.addEventListener('submit', (event) => {
+        submitForm();
     });
 
 </script>
