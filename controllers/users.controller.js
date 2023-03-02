@@ -49,12 +49,12 @@ module.exports.showEditProfile = (req, res, next) => {
 module.exports.updateProfile = (req, res, next) => {
   const { name, lastName, email, password } = req.body;
   const profilePic = req.file ? req.file.path : req.user.profilePic;
+  const changes = { name, lastName, email, password, profilePic };
 
-  User.findByIdAndUpdate(
-    req.user.id,
-    { name, lastName, email, password, profilePic },
-    { runValidators: true }
-  )
+  Object.assign(req.user, changes);
+
+  req.user
+    .save()
     .then(() => {
       res.redirect("/profile");
     })
