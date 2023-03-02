@@ -15,6 +15,7 @@ module.exports.sendNotes = (req, res, next) => {
   Message.find({ user: userId })
   //TODO sort------------------------------
     .then((messages) => {
+      console.log("----asking for History");
       if (messages != undefined) {
         history = messages.reduce((accumulator, message) => {
           return accumulator + message.message + "\n";
@@ -24,6 +25,7 @@ module.exports.sendNotes = (req, res, next) => {
       }
     })
     .then(() => {
+      console.log("----connecting to API");
       req.body.user = req.user.id;
       const order = "//Psychological diagnosis by the Therapist: "
       // generate response from OpenAI API
@@ -43,12 +45,20 @@ module.exports.sendNotes = (req, res, next) => {
       });
       })
       .then((response) => {
-        const reply = response.data.choices[0].text;
+        console.log("----returning API reply");
+        const diagnosis = response.data.choices[0].text;
+        console.log(diagnosis);
         // update diagnosis in MongoDB
-        return User.updateProfile({ diagnosis: reply });
+        const { name, lastName, email, password } = req.body;
+        const profilePic = req.file ? req.file.path : req.user.profilePic;
+        return User.findByIdAndUpdate(
+          req.user.id,
+          { name, lastName, profilePic, email, password, diagnosis },
+          { runValidators: true }
+        )
       })
-      .then((diagnosis) => {
-        res.render("users/profile", { diagnosis });
+      .then(() => {
+        res.redirect("/profile");
       })
       .catch((error) => {
         console.error("An error occurred", error);
