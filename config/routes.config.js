@@ -13,7 +13,8 @@ router.get("/", common.home);
 router.get("/register", users.create);
 router.post("/register", users.doCreate);
 router.get("/profile", secure.isAuthenticated, users.showProfile);
-router.post("/profile", secure.isAuthenticated, multer.single('profilePic'), users.updateProfile);
+router.get("/editProfile", secure.isAuthenticated, users.showEditProfile);
+router.post("/profile/edit", secure.isAuthenticated, multer.single('profilePic'), users.updateProfile);
 
 router.get("/login", users.login);
 router.post("/login", users.doLogin);

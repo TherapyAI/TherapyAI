@@ -3,8 +3,8 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 
 module.exports.askPermission = (req, res, next) => {
-  res.render("users/askPermission")
-}
+  res.render("users/askPermission");
+};
 
 module.exports.create = (req, res, next) => {
   res.render("register");
@@ -42,13 +42,17 @@ module.exports.showProfile = (req, res, next) => {
   res.render("users/profile", { user: req.user });
 };
 
+module.exports.showEditProfile = (req, res, next) => {
+  res.render("users/editProfile", { user: req.user });
+};
+
 module.exports.updateProfile = (req, res, next) => {
-  const { name, lastName } = req.body;
+  const { name, lastName, email, password } = req.body;
   const profilePic = req.file ? req.file.path : req.user.profilePic;
 
   User.findByIdAndUpdate(
     req.user.id,
-    { name, lastName, profilePic },
+    { name, lastName, email, password, profilePic },
     { runValidators: true }
   )
     .then(() => {
