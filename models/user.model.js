@@ -31,6 +31,10 @@ const schema = new mongoose.Schema(
       enum: ["admin", "patient", "guest"],
       default: "guest",
     },
+    diagnosis: {
+      type: String,
+      default: "Here you will find your diagnosis once you interact with TherapyAi"
+    }
   },
   { timestamps: true }
 );

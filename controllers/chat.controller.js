@@ -11,7 +11,7 @@ module.exports.sendChat = (req, res, next) => {
 
   const userId = req.user.id;
   Message.find({ user: userId })
-  //TODO sort
+  //TODO sort------------------------------
     .then((messages) => {
       if (messages != undefined) {
         history = messages.reduce((accumulator, message) => {

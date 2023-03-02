@@ -2,6 +2,35 @@ body {
   background-color: rgb(232 238 255);
 }
 
+header {
+    /* background-color: #9a89b2; */
+    background: rgb(194, 181, 213) 0%;
+    background: -moz-linear-gradient(
+      0deg,
+      rgb(194, 181, 213) 0%,
+      rgb(200, 186, 220) 21%,
+      rgb(221, 211, 235) 100%
+    );
+    background: -webkit-linear-gradient(
+      0deg,
+      rgb(164, 149, 186) 0%,
+      rgb(200, 186, 220) 21%,
+      rgb(221, 211, 235) 100%
+    );
+    background: linear-gradient(
+      0deg,
+      rgb(164, 149, 186) 0%,
+      rgb(200, 186, 220) 21%,
+      rgb(221, 211, 235) 100%
+    );
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#87779f",endColorstr="#b2a1c9",GradientType=1);
+}
+
+.accountDetail {
+  background-color: rgb(226, 216, 238);
+}
+
+
 .outer {
   margin: auto;
 }

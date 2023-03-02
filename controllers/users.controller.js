@@ -47,9 +47,9 @@ module.exports.showEditProfile = (req, res, next) => {
 };
 
 module.exports.updateProfile = (req, res, next) => {
-  const { name, lastName, email, password } = req.body;
+  const { name, lastName, email, password, diagnosis } = req.body;
   const profilePic = req.file ? req.file.path : req.user.profilePic;
-  const changes = { name, lastName, email, password, profilePic };
+  const changes = { name, lastName, email, password, profilePic, diagnosis };
 
   Object.assign(req.user, changes);
 
