@@ -19,7 +19,7 @@ const schema = new mongoose.Schema(
     },
     profilePic: {
       type: String,
-      default: "/images/Default_pfp.svg",
+      default: "https://res.cloudinary.com/du34qkz1s/image/upload/v1677921130/Default_pfp_bjpn8i.svg",
     },
     password: {
       type: String,

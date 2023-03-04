@@ -16,6 +16,13 @@
               style="max-width: 400px;"
             >{{removePrefix message.message}}</li>
           </div>
+        {{else if (contains message.message "TherapyAi: ")}}
+          <div class="d-flex flex-row justify-content-start">
+            <li
+              class="therapist rounded-2 m-2 p-2"
+              style="max-width: 400px;"
+            >{{removePrefix message.message}}</li>
+          </div>
         {{/if}}
       {{/each}}
     </ul>

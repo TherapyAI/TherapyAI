@@ -1,16 +1,29 @@
-<div class="d-flex flex-row justify-content-center">
+<!-- The video -->
+<video autoplay muted loop id="myVideo">
+  <source src="/videos/home.mp4" type="video/mp4">
+</video>
 
-    {{#if currentUser}}
-        <div>
-            <a href="/profile">Profile</a>
-            <form action="/logout" method="POST">
-                <button type="submit" class="rounded-3 border-0">Logout</button>
-            </form>
-        </div>
-    {{else}}
-        <div>
-            <a href="/login">Login</a>
-            <a href="/register">Register</a>
-        </div>
-    {{/if}}
+<!-- Optional: some overlay text to describe the video -->
+<div class="content">
+  <!-- Use a button to pause/play the video with JavaScript -->
+  <button id="myBtn" onclick="myFunction()">Pause</button>
 </div>
+
+<script>
+// Get the video
+var video = document.getElementById("myVideo");
+
+// Get the button
+var btn = document.getElementById("myBtn");
+
+// Pause and play the video, and change the button text
+function myFunction() {
+  if (video.paused) {
+    video.play();
+    btn.innerHTML = "Pause";
+  } else {
+    video.pause();
+    btn.innerHTML = "Play";
+  }
+}
+</script>

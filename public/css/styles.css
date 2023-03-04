@@ -2,37 +2,51 @@ body {
   background-color: rgb(232 238 255);
 }
 
-header {
-    /* background-color: #9a89b2; */
-    background: rgb(194, 181, 213) 0%;
-    background: -moz-linear-gradient(
-      0deg,
-      rgb(194, 181, 213) 0%,
-      rgb(200, 186, 220) 21%,
-      rgb(221, 211, 235) 100%
-    );
-    background: -webkit-linear-gradient(
-      0deg,
-      rgb(164, 149, 186) 0%,
-      rgb(200, 186, 220) 21%,
-      rgb(221, 211, 235) 100%
-    );
-    background: linear-gradient(
-      0deg,
-      rgb(164, 149, 186) 0%,
-      rgb(200, 186, 220) 21%,
-      rgb(221, 211, 235) 100%
-    );
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#87779f",endColorstr="#b2a1c9",GradientType=1);
+/* header {
+  background: rgb(208,194,227);
+  background: -moz-linear-gradient(0deg, rgba(208,194,227,1) 0%, rgba(178,161,201,1) 83%, rgba(168,151,191,1) 92%, rgba(135,119,159,1) 100%);
+  background: -webkit-linear-gradient(0deg, rgba(208,194,227,1) 0%, rgba(178,161,201,1) 83%, rgba(168,151,191,1) 92%, rgba(135,119,159,1) 100%);
+  background: linear-gradient(0deg, rgba(208,194,227,1) 0%, rgba(178,161,201,1) 83%, rgba(168,151,191,1) 92%, rgba(135,119,159,1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#d0c2e3",endColorstr="#87779f",GradientType=1);
+} */
+/* Style the video: 100% width and height to cover the entire window */
+#myVideo {
+  z-index: -1;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+}
+
+/* Add some content at the bottom of the video/page */
+.content {
+  position: fixed;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  color: #f1f1f1;
+  width: 100%;
+  padding: 20px;
+}
+
+/* Style the button used to pause/play the video */
+#myBtn {
+  width: 200px;
+  font-size: 18px;
+  padding: 10px;
+  border: none;
+  background: #000;
+  color: #fff;
+  cursor: pointer;
+}
+
+#myBtn:hover {
+  background: #ddd;
+  color: black;
 }
 
 .accountDetail {
   background-color: rgb(226, 216, 238);
-}
-
-
-.outer {
-  margin: auto;
 }
 
 .inner {

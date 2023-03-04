@@ -47,18 +47,21 @@ module.exports.showEditProfile = (req, res, next) => {
 };
 
 module.exports.updateProfile = (req, res, next) => {
-  const { name, lastName, email, password } = req.body;
+  const { name, lastName, email, password, diagnosis } = req.body;
   const profilePic = req.file ? req.file.path : req.user.profilePic;
-  const data = req.file ? { profilePic } : { name, lastName, email, password };
 
-  Object.assign(req.user, data);
-
-  req.user
-    .save()
+  User.findByIdAndUpdate(
+    req.user.id,
+    { name, lastName, profilePic, email, password, diagnosis },
+    { runValidators: true }
+  )
     .then(() => {
       res.redirect("/profile");
     })
-    .catch(next);
+    .catch((error) => {
+      console.log(error);
+      next(error);
+    });
 };
 
 module.exports.login = (req, res) => {
@@ -66,17 +69,26 @@ module.exports.login = (req, res) => {
 };
 
 module.exports.doLogin = (req, res, next) => {
+  function renderWithErrors(errors) {
+    res.render("login", { errors, user: req.body });
+  }
   User.findOne({ email: req.body.email })
     .then((user) => {
-      bcrypt
-        .compare(req.body.password, user.password)
-        .then((ok) => {
-          if (ok) {
-            req.session.userId = user.id;
-            res.redirect("/chat");
-          }
-        })
-        .catch(next);
+      if(user) {
+        bcrypt
+          .compare(req.body.password, user.password)
+          .then((ok) => {
+            if (ok) {
+              req.session.userId = user.id;
+              res.redirect("/chat");
+            } else {
+              renderWithErrors({ password: "Password does not match" })
+            }
+          })
+          .catch(next);
+      } else {
+        renderWithErrors({ email: "Email not registered", password: "An existing email is required" })
+      }
     })
     .catch(next);
 };

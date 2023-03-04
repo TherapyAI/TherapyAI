@@ -70,6 +70,10 @@ module.exports.loadChat = (req, res, next) => {
   const userId = req.user.id;
   Message.find({ user: userId })
     .then((messages) => {
+      if(messages.length === 0) {
+        const introduction = `TherapyAi: Hello, ${req.user.name}. I am TherapyAi. How can I help you?`;
+        return Message.create({ message: introduction, user: req.user.id });
+      }
       res.render("users/chat", { messages, profilePic: req.user.profilePic });
     })
     .catch((error) => {
