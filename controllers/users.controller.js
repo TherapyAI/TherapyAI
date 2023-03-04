@@ -47,21 +47,18 @@ module.exports.showEditProfile = (req, res, next) => {
 };
 
 module.exports.updateProfile = (req, res, next) => {
-  const { name, lastName, email, password, diagnosis } = req.body;
+  const { name, lastName, email, password } = req.body;
   const profilePic = req.file ? req.file.path : req.user.profilePic;
+  const data = req.file ? { profilePic } : { name, lastName, email, password };
 
-  User.findByIdAndUpdate(
-    req.user.id,
-    { name, lastName, profilePic, email, password, diagnosis },
-    { runValidators: true }
-  )
+  Object.assign(req.user, data);
+
+  req.user
+    .save()
     .then(() => {
       res.redirect("/profile");
     })
-    .catch((error) => {
-      console.log(error);
-      next(error);
-    });
+    .catch(next);
 };
 
 module.exports.login = (req, res) => {
