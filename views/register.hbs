@@ -1,9 +1,10 @@
+{{>header registerPage=true}}
 <div class="row justify-content-center">
   <div class="col-12 col-md-4">
-    <h1 class="mb-3">Register</h1>
-
-    <div class="card">
+    <div class="card mt-5">
+      <div class="card-header">Register</div>
       <div class="card-body">
+        {{errors}}
         {{#if errors}}<div class="alert alert-danger">Review form data</div>{{/if}}
         
         <form action="/register" method="POST">
@@ -36,12 +37,12 @@
           </div>
         
           <div class="d-grid">
-            <button type="submit" class="btn btn-primary">Create</button>
+            <button type="submit" class="btn btn-login-register fw-bold text-white">Create</button>
           </div>
         </form>
         <hr>
         <div class="d-grid">
-          <a class="btn btn-secondary" href="/login">Login</a>
+          <a class="btn btn-login-register fw-bold text-white" href="/login">Login</a>
         </div>
       </div>
     </div>

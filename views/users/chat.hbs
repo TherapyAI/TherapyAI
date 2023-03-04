@@ -1,3 +1,4 @@
+{{>header}}
 <div class="outer mt-3">
     <div class="inner d-flex flex-row justify-content-center">
         <div class="d-flex flex-row justify-content-center">
@@ -20,8 +21,11 @@
             </div>
         </div>
         </div>
-        <div class="profilePic">
+        <div class="profilePic d-flex flex-column justify-content-start">
             <a href="/profile"><img src="{{profilePic}}" alt="profilePic" width="120px" class="rounded-circle"></a>
+            <div class="d-flex justify-content-center">
+                <a href="/profile" class="logo fs-5 header">Profile</a href="/profile">
+            </div>
         </div>
     </div>
 </div>

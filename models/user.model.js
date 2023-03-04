@@ -34,6 +34,10 @@ const schema = new mongoose.Schema(
     diagnosis: {
       type: String,
       default: "Here you will find your diagnosis once you interact with TherapyAi"
+    },
+    countMessages: {
+      type: Number,
+      default: 0
     }
   },
   { timestamps: true }

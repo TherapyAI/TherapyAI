@@ -1,33 +1,33 @@
+{{>header registerPage=false}}
+<div class="d-flex justify-content-center mt-5">
+  <div class="col-xl-4 mt-5">
+    <div class="card mb-4 mb-xl-0 mt-5">
+      <div class="card-header">Login</div>
+      {{#if errors}}
+        <div class="alert alert-danger">
+          Review form data
+        </div>
+      {{/if}}
+      <form action="/login" method="POST" class="p-3">
 
-<h1>Login</h1>
-
-{{#if errors}}
-  <div class="alert alert-danger">
-    review form data
+        <div class="input-group mb-1">
+          <span class="input-group-text"><i class="fa fa-envelope fa-fw"></i></span>
+          <input type="email" value="{{user.email}}" name="email" class="form-control {{#if errors.email}}is-invalid{{/if}}"
+            placeholder="user@example.org">
+          {{#if errors.email}}<div class="invalid-feedback">{{errors.email}}</div>{{/if}}
+        </div>
+      
+        <div class="input-group mb-2">
+          <span class="input-group-text"><i class="fa fa-lock fa-fw"></i></span>
+          <input type="password" value="{{user.password}}" name="password"
+            class="form-control {{#if errors.password}}is-invalid{{/if}}" placeholder="****">
+          {{#if errors.password}}<div class="invalid-feedback">{{errors.password}}</div>{{/if}}
+        </div>
+      
+        <div class="d-grid">
+          <button type="submit" class="btn btn-login-register fw-bold text-white">Login</button>
+        </div>
+      </form>
+    </div>
   </div>
-{{/if}}
-
-<form action="/login" method="POST">
-  <div class="mb-3">
-    <label for="email" class="form-label">email</label>
-    <input type="email" value="{{user.email}}" name="email" class="form-control {{#if errors.email}}is-invalid{{/if}}" id="email">
-    {{#if errors.email}}
-      <div class="invalid-feedback">
-        {{errors.email}}
-      </div>
-    {{/if}}
-  </div>
-
-  <div class="mb-3">
-    <label for="password" class="form-label">password</label>
-    <input type="password" value="{{user.password}}" name="password" class="form-control {{#if errors.password}}is-invalid{{/if}}" id="password">
-    {{#if errors.password}}
-      <div class="invalid-feedback">
-        {{errors.password}}
-      </div>
-    {{/if}}
-  </div>
-
-  
-  <button type="submit" class="btn btn-primary">Login</button>
-</form>
+</div>
