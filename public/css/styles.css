@@ -9,7 +9,14 @@ body {
   background: linear-gradient(0deg, rgba(208,194,227,1) 0%, rgba(178,161,201,1) 83%, rgba(168,151,191,1) 92%, rgba(135,119,159,1) 100%);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#d0c2e3",endColorstr="#87779f",GradientType=1);
 } */
-/* Style the video: 100% width and height to cover the entire window */
+.header {
+  color: #74b5f9;
+}
+
+.logo {
+  text-decoration: none;
+}
+
 #myVideo {
   z-index: -1;
   position: fixed;
@@ -23,17 +30,18 @@ body {
 .content {
   position: fixed;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0);
   color: #f1f1f1;
   width: 100%;
-  padding: 20px;
+}
+
+.btn-buttom {
+  width: 200px;
 }
 
 /* Style the button used to pause/play the video */
 #myBtn {
-  width: 200px;
   font-size: 18px;
-  padding: 10px;
   border: none;
   background: #000;
   color: #fff;
