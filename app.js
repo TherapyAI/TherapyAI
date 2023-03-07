@@ -22,10 +22,10 @@ const router = require("./config/routes.config");
 app.use(router);
 
 app.use((error, req, res, next) => {
-   error = !error.status ? createError(500, error) : error;
-   console.error(error);
-   res.status(error.status).render(`errors/${error.status}`, { error });
- });
+  error = !error.status ? createError(500, error) : error;
+  console.error(error);
+  res.status(error.status).render(`errors/${error.status}`, { error });
+});
 
 const port = 3000;
 

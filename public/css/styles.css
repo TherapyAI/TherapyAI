@@ -1,9 +1,21 @@
 body {
-  background: rgb(255,255,255);
-background: -moz-linear-gradient(197deg, rgba(255,255,255,1) 0%, rgba(158,121,217,1) 100%);
-background: -webkit-linear-gradient(197deg, rgba(255,255,255,1) 0%, rgba(158,121,217,1) 100%);
-background: linear-gradient(197deg, rgba(255,255,255,1) 0%, rgba(158,121,217,1) 100%);
-filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffffff",endColorstr="#9e79d9",GradientType=1);
+  background: rgb(255, 255, 255);
+  background: -moz-linear-gradient(
+    197deg,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(158, 121, 217, 1) 100%
+  );
+  background: -webkit-linear-gradient(
+    197deg,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(158, 121, 217, 1) 100%
+  );
+  background: linear-gradient(
+    197deg,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(158, 121, 217, 1) 100%
+  );
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffffff",endColorstr="#9e79d9",GradientType=1);
 }
 
 /* header {
@@ -17,12 +29,12 @@ filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffffff",endCo
   color: #74b5f9;
 }
 
-.btn-login-register  {
+.btn-login-register {
   background-color: #74b5f9;
 }
 
 .btn-login-register:hover {
-  background-color: rgba(158,121,217,1);
+  background-color: rgba(158, 121, 217, 1);
 }
 
 .header-sides {
@@ -87,6 +99,9 @@ filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#ffffff",endCo
   height: 100%;
 }
 
+.img {
+  width: 100%;
+}
 .messagePermission {
   background-color: rgba(130, 131, 180, 0.76);
   border-radius: 12px;

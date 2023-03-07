@@ -49,19 +49,18 @@ module.exports.showEditProfile = (req, res, next) => {
 module.exports.updateProfile = (req, res, next) => {
   const { name, lastName, email, password, diagnosis } = req.body;
   const profilePic = req.file ? req.file.path : req.user.profilePic;
+  const data = req.file
+    ? { profilePic }
+    : { name, lastName, email, password, diagnosis };
 
-  User.findByIdAndUpdate(
-    req.user.id,
-    { name, lastName, profilePic, email, password, diagnosis },
-    { runValidators: true }
-  )
+  Object.assign(req.user, data);
+
+  req.user
+    .save()
     .then(() => {
       res.redirect("/profile");
     })
-    .catch((error) => {
-      console.log(error);
-      next(error);
-    });
+    .catch(next);
 };
 
 module.exports.login = (req, res) => {
@@ -74,7 +73,7 @@ module.exports.doLogin = (req, res, next) => {
   }
   User.findOne({ email: req.body.email })
     .then((user) => {
-      if(user) {
+      if (user) {
         bcrypt
           .compare(req.body.password, user.password)
           .then((ok) => {
@@ -82,12 +81,15 @@ module.exports.doLogin = (req, res, next) => {
               req.session.userId = user.id;
               res.redirect("/chat");
             } else {
-              renderWithErrors({ password: "Password does not match" })
+              renderWithErrors({ password: "Password does not match" });
             }
           })
           .catch(next);
       } else {
-        renderWithErrors({ email: "Email not registered", password: "An existing email is required" })
+        renderWithErrors({
+          email: "Email not registered",
+          password: "An existing email is required",
+        });
       }
     })
     .catch(next);
